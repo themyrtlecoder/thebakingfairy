@@ -1,6 +1,7 @@
 'use server';
 
 import nodemailer from 'nodemailer';
+import type SMTPTransport from 'nodemailer/lib/smtp-transport';
 
 const env = (name: string): string => {
     if (process.env[name]) {
@@ -19,8 +20,24 @@ const sendEmail = async(formData: FormData) => {
       private: formData.get('private')
     }
 
-    const mailer = nodemailer.createTransport({
-        host: env('SMTPSERVER'),
+    const smtpConfig: SMTPTransport.Options = {
+    host: env('SMTPSERVER'),
+    port: Number(env('SMTPPORT')),
+    auth: {
+            user: env('SMTPUSER'),
+            pass: env('SMTPTOKEN'),
+    },
+    tls: {
+            ciphers: 'SSLv3',
+            rejectUnauthorized: true
+    }
+    };
+
+    const mailer = nodemailer.createTransport(
+        smtpConfig
+        /*{
+
+        /*host: env('SMTPSERVER'),
         port: env('SMTPPORT'),
         secure: false, // upgrade later with STARTTLS
         auth: {
@@ -30,8 +47,8 @@ const sendEmail = async(formData: FormData) => {
         tls: {
             ciphers: 'SSLv3',
             rejectUnauthorized: true
-            }
-    });
+        }
+    }*/);
                 
    await mailer.sendMail({
         from: `THE BAKING FAIRY<${env('SMTPUSER')}>`,
