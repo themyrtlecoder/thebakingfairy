@@ -1,0 +1,168 @@
+@use 'variables.scss' as *;
+
+.navigation {
+    position: fixed;
+    top: 1.5em;
+    left: 1em;
+    width: calc(100% - 2em);
+    display: flex;
+    justify-content: space-between;
+    padding: 1em 2em;
+    backdrop-filter: blur(4px);
+    border-radius: 1em;
+    background-color: rgba(0, 0, 0, 0.0625);
+    .soundtrack {
+        padding: 0;
+        margin: 0;
+        border: none;
+        cursor: pointer;
+    }
+    .field_toggle {
+    width: min-content;
+    height: min-content;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    cursor: pointer;
+    button {
+        width: max-content;
+        //transition: all ease-in-out 1s;
+        &:first-of-type {
+            &.inactive {
+                translate: 0 -150% 0;
+            }
+        }
+        &:last-of-type {
+            position: absolute;
+            left: 0%;
+            top: 50%;
+            translate: -0% -50% 0;
+            &.inactive {
+                top: 150%;
+            }
+        }
+    } 
+    }
+}
+
+.findings {
+    padding: 4em 0 3em 0;
+    h4, p {
+        color: $navy;
+    }
+    h4 {
+        text-transform: uppercase;
+        padding: .5em 0;
+    }
+    p {
+        text-transform: lowercase;
+        padding: .5em 0;
+    }
+    svg {
+        padding-top: 2em;
+        width: 95%;
+        height: auto;
+        fill: $navy;
+    }
+}
+
+.field_notes {
+    &.active {
+        top: 0vh;
+    }
+    &.inactive {
+        top: 100vh;
+    }
+    background-color: white;
+    transition: all ease-in-out 1s;
+    position: fixed;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    padding-top: 5em;
+    .form {
+        h2 {
+            text-transform: uppercase;
+            border-bottom: double 6px $navy;
+            padding: 1.5vw;
+            font-size: calc(0.5em + 4vw);
+            font-weight: bold;
+            color: $navy;
+        }
+        h4 {
+            text-transform: uppercase;
+            border-bottom: double 6px $navy;
+            padding: 1vw 2vw;
+            font-size: .75em;
+            color: $navy;
+            font-style: italic;
+        }
+        fieldset {
+            border: none;
+            padding: 1vw 2vw;
+            label {
+                text-transform: uppercase;
+                font-weight: bold;
+                color: $navy;
+            }
+            &:not(:first-of-type){
+                border-top: solid 2px $navy;
+            }
+            textarea, input[type=text], span {
+                border: none;
+                border-radius: 0;
+                width: 100%;
+                color: $navy;
+                &, &::placeholder {
+                    font-size: 1em;
+                }
+                &::placeholder {
+                    font-style: italic;
+                    color: rgba($navy, 0.75);
+                }
+                resize: none;
+                line-height: 2;
+            }
+            input[type="radio"] {
+                appearance: none;
+                width: 1.5em;
+                height: 1.5em;
+                border: 2px solid $navy;
+                border-radius: 50%;
+                position: relative;
+                translate: 0 25% 0;
+                cursor: pointer;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    width: 0.8em;
+                    height: 0.8em;
+                    background: $navy;
+                    border-radius: 50%;
+                    transform: translate(-50%, -50%) scale(0);
+                    transition: transform 0.2s ease-in-out;
+                }
+                &:checked::before {
+                    transform: translate(-50%, -50%) scale(1);
+                }
+                &:focus-visible {
+                    outline: 2px solid currentColor;
+                    outline-offset: 2px;
+                }
+            }
+        }
+        button {
+            width: 100%;
+            text-transform: uppercase;
+            border-top: double 6px $navy;
+            padding: 1em 2em;
+            font-size: 1em;
+            color: #fff;
+            background-color: $navy;
+        }
+    }
+}
+
