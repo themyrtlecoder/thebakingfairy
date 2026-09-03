@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.scss";
-import { ContextProvider } from "./context";
 
 export const metadata: Metadata = {
   title: "the baking fairy report",
@@ -9,13 +8,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <ContextProvider>
       <html lang="en">
         <body>
           {children}
         </body>
-      </html>
-    </ContextProvider>
-    
+      </html> 
   );
 }
